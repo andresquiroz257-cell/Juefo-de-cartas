@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class Frmjuego extends JFrame {
-
+    JTabbedPane tpJugadores
     private JPanel pnlJugador1, pnlJugador2;
     private Jugador jugador1, jugador2;
 
@@ -75,7 +75,18 @@ public class Frmjuego extends JFrame {
     }
 
     private void verificar() {
-
+    
+        int pestaña = tpJugadores.getSelectedIndex();
+        switch (pestaña){
+            case 0:
+            JOptionPane.showMessageDialog(parentComponent:null,
+                    jugador1.getGrupos());
+                break;    
+            case 1:
+                JOptionPane.showMessageDialog(parentComponent:null,
+                    jugador2.getGrupos()); 
+                break;    
+        }
     }
     }
 }
