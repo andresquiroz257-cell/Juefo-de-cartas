@@ -24,7 +24,8 @@ public class Carta {
             
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                JOptionPane.showMessageDialog(parentComponent:null,
+                getNombre() + " "+ getPinta)
             }
         });
 
