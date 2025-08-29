@@ -21,7 +21,7 @@ public class Carta {
         pnl.add(lblCarta);     
 
         lblCarta.addMouseListener(new MouseAdapter(){
-            
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(parentComponent:null,

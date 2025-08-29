@@ -25,5 +25,14 @@ public class Jugador {
         }
         pnl.repaint();
     }
+        public String getGrupos(){
+            String resultado = " no se encontraron grupos ";
 
+            int [] contadores = new int[13];
+            for ( Carta c: cartas){
+                contadores[ c.getNombre().ordinal() ]++;
+            }
+
+            return resultado
+        }
 }
