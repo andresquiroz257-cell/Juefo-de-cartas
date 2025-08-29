@@ -1,7 +1,17 @@
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 public class Frmjuego extends JFrame {
+
+    private JPanel pnlJugador1, pnlJugador2;
+    private Jugador jugador1, jugador2;
 
     public Frmjuego(){
         setTitle(title:"Apuntado");
@@ -18,23 +28,54 @@ public class Frmjuego extends JFrame {
         getContentPane().add(btnVerificar);
 
         pnlJugador1 = new JPanel();
-        pnlJugador1.setBackground(new Color(r:0, g: 230, b: 356));
-        pnlJugador1.setLayout(mgr:null)
+        pnlJugador1.setLayout(null);
+        pnlJugador1.setBackground(new Color(150, 255, 50));
 
         pnlJugador2 = new JPanel();
-        pnlJugador2.setBackground(new Color(r:0, g: 230, b: 356));
-        pnlJugador2.setLayout(mgr:null)
+        pnlJugador2.setLayout(null);
+        pnlJugador2.setBackground(new Color(0, 255, 255));
 
-        jTabbedpane tpjugadores = new jTabbedpane();
-        tpjugadores.addTab(title)
+        JTabbedPane tpJugadores = new JTabbedPane();
+        tpJugadores.addTab("Martín Estrada Contreras", pnlJugador1);
+        tpJugadores.addTab("Raúl Vidal", pnlJugador2);
+
+        tpJugadores.setBounds(10, 40, 550, 200);
+        getContentPane().add(tpJugadores);
+
+        btnRepartir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                repartir();
+            }
+
+        });
+
+        btnVerificar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                verificar();
+            }
+
+        });
+
 
         Jugador1=new Jugador();
         Jugador2=new Jugador();
 
-        private void repartir(){
-            Jugador1.repartir();
-            Jugador2.repartir();
+         private void repartir() {
+        // repartir las cartas
+        jugador1.repartir();
+        jugador2.repartir();
 
-        }
+        // mostrar las cartas
+        jugador1.mostrar(pnlJugador1);
+        jugador2.mostrar(pnlJugador2);
+    }
+
+    private void verificar() {
+
+    }
     }
 }
