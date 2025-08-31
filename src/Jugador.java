@@ -41,15 +41,15 @@ public class Jugador {
             } 
             if(hayGrupos){
                 resultado = " se encontraron los siguientes grupos: \n";
-                int p = 0
+                int p = 0;
                 for(int cont: contadores){
                     if(cont >=2){
                         resultado += Grupo.values()[cont] + " de " + NombreCarta.values()[p]+ "\n";
                     }
-                    p++
+                    p++;
                 }
             }
 
-            return resultado
+            return resultado; aaa //test
         }
 }
