@@ -1,4 +1,4 @@
-public enum pinta {
+public enum Pinta {
     TREBOL,
     PICA,
     CORAZON,

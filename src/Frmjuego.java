@@ -1,47 +1,51 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class Frmjuego extends JFrame {
-    JTabbedPane tpJugadores
-    private JPanel pnlJugador1, pnlJugador2;
-    private Jugador jugador1, jugador2;
 
-    public Frmjuego(){
-        setTitle(title:"Apuntado");
-        setSize(width:600, 400)
+    private JTabbedPane tpJugadores;
+
+    private Jugador jugador1, jugador2;
+    private JPanel pnlJugador1, pnlJugador2;
+
+    public Frmjuego() {
+        setSize(600, 300);
+        setTitle("Juguemos al REMIS");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
-        JButton btnRepartir=new JButton("Repartir");
+        // Agregar botones de comando
+        JButton btnRepartir = new JButton("Repartir");
         btnRepartir.setBounds(10, 10, 100, 25);
         getContentPane().add(btnRepartir);
 
-        JButton btnVerificar=new JButton("Verificar");
+        JButton btnVerificar = new JButton("Verificar");
         btnVerificar.setBounds(120, 10, 100, 25);
         getContentPane().add(btnVerificar);
 
         pnlJugador1 = new JPanel();
         pnlJugador1.setLayout(null);
-        pnlJugador1.setBackground(new Color(150, 255, 50));
+        pnlJugador1.setBackground(new Color(50, 255, 0));
 
         pnlJugador2 = new JPanel();
         pnlJugador2.setLayout(null);
         pnlJugador2.setBackground(new Color(0, 255, 255));
 
-        JTabbedPane tpJugadores = new JTabbedPane();
-        tpJugadores.addTab("Martín Estrada Contreras", pnlJugador1);
+        tpJugadores = new JTabbedPane();
+        tpJugadores.addTab("Martin Estrada Contreras", pnlJugador1);
         tpJugadores.addTab("Raúl Vidal", pnlJugador2);
 
         tpJugadores.setBounds(10, 40, 550, 200);
         getContentPane().add(tpJugadores);
 
+        // crear los eventos
         btnRepartir.addActionListener(new ActionListener() {
 
             @Override
@@ -60,33 +64,28 @@ public class Frmjuego extends JFrame {
 
         });
 
+        // instanciar los jugadores
+        jugador1 = new Jugador();
+        jugador2 = new Jugador();
+    }
 
-        Jugador1=new Jugador();
-        Jugador2=new Jugador();
-
-         private void repartir() {
-        // repartir las cartas
+    private void repartir() {
         jugador1.repartir();
         jugador2.repartir();
 
-        // mostrar las cartas
         jugador1.mostrar(pnlJugador1);
         jugador2.mostrar(pnlJugador2);
     }
 
     private void verificar() {
-    
-        int pestaña = tpJugadores.getSelectedIndex();
-        switch (pestaña){
+        switch (tpJugadores.getSelectedIndex()) {
             case 0:
-            JOptionPane.showMessageDialog(parentComponent:null,
-                    jugador1.getGrupos());
-                break;    
+                JOptionPane.showMessageDialog(null, jugador1.getGrupos());
+                break;
             case 1:
-                JOptionPane.showMessageDialog(parentComponent:null,
-                    jugador2.getGrupos()); 
-                break;    
+                JOptionPane.showMessageDialog(null, jugador2.getGrupos());
+                break;
         }
     }
-    }
+
 }

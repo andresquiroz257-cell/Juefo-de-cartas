@@ -1,31 +1,38 @@
 
-import Java.awt.event.MouseAdapter;
-import Java.awt.event.MouseEvent;
 import java.util.Random;
-import javax.swing.JFrame;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class Carta {
 
     private int indice;
 
     public Carta (Random r) {
-        indice = r.nextint(bound 52) + 1;
+        indice = r.nextInt( 52) + 1;
     }
 
     public void mostrar (JPanel pnl, int x, int y){
+        String archivoImagen = "img/CARTA" + indice + ".jpg";
+        ImageIcon imgCarta = new ImageIcon(getClass().getResource(archivoImagen));
         JLabel lblCarta = new JLabel();
-        String archivoCarta = "imagenes/CARTA"+indice + ".jpg";
-        ImageIcon imgCarta = new ImageIcon();
+               
         lblCarta.setIcon(imgCarta);
-        lblCarta.setBounds(x, y, imgCarta.getIconWidht(), imgCarta.getIconHeigth);
-        pnl.add(lblCarta);     
+        lblCarta.setBounds(x, y, imgCarta.getIconWidth(), imgCarta.getIconHeight());
+        pnl.add(lblCarta);
+    
 
         lblCarta.addMouseListener(new MouseAdapter(){
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(parentComponent:null,
-                getNombre() + " "+ getPinta)
+                JOptionPane.showMessageDialog(null,
+                "Carta" + getNombre() + " de "+ getPinta());
             }
         });
 
@@ -40,14 +47,20 @@ public class Carta {
             else if(indice<= 39){
                 return Pinta.CORAZON;
             }
-            else (
-                return Pinta.DIAMANTE;
-            )         
+            else 
+                return Pinta.DIAMANTE;             
         }
 
         public NombreCarta getNombre(){
             int residuo=indice % 13;
-            in posicion = residuo == 0 ? 12 : residuo - 1;
+            int posicion = residuo == 0 ? 12 : residuo - 1;
+
+            if (residuo == 0) {
+          posicion = 12;
+          } else {
+          posicion = residuo - 1;
+          }
+
             return NombreCarta.values()[posicion];
         }
 }

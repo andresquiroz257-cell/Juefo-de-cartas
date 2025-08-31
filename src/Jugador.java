@@ -50,6 +50,6 @@ public class Jugador {
                 }
             }
 
-            return resultado; aaa //test
+            return resultado; 
         }
 }
