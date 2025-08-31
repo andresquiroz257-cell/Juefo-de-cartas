@@ -18,7 +18,7 @@ public class Carta {
     }
 
     public void mostrar (JPanel pnl, int x, int y){
-        String archivoImagen = "img/CARTA" + indice + ".jpg";
+        String archivoImagen = "C:\\Users\\Andres\\Downloads\\Cartazz\\Juefo-de-cartas\\src\\img\\Cartas/CARTA" + indice + ".jpg";
         ImageIcon imgCarta = new ImageIcon(getClass().getResource(archivoImagen));
         JLabel lblCarta = new JLabel();
                
