@@ -16,7 +16,7 @@ public class Frmjuego extends JFrame {
     private JPanel pnlJugador1, pnlJugador2;
 
     public Frmjuego() {
-        setSize(600, 300);
+        setSize(800, 400);
         setTitle("Juguemos al REMIS");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -42,7 +42,7 @@ public class Frmjuego extends JFrame {
         tpJugadores.addTab("Martin Estrada Contreras", pnlJugador1);
         tpJugadores.addTab("Raúl Vidal", pnlJugador2);
 
-        tpJugadores.setBounds(10, 40, 550, 200);
+        tpJugadores.setBounds(10, 40, 750, 300);
         getContentPane().add(tpJugadores);
 
         // crear los eventos

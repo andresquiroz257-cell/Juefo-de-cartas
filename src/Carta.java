@@ -18,7 +18,7 @@ public class Carta {
     }
 
     public void mostrar (JPanel pnl, int x, int y){
-        String archivoImagen = "C:\\Users\\Andres\\Downloads\\Cartazz\\Juefo-de-cartas\\src\\img\\Cartas/CARTA" + indice + ".jpg";
+        String archivoImagen = "/img/Cartas/CARTA" + indice + ".jpg";
         ImageIcon imgCarta = new ImageIcon(getClass().getResource(archivoImagen));
         JLabel lblCarta = new JLabel();
                
@@ -32,7 +32,7 @@ public class Carta {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(null,
-                "Carta" + getNombre() + " de "+ getPinta());
+                "Carta " + getNombre() + " de "+ getPinta());
             }
         });
 
