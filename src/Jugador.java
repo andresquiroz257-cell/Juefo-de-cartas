@@ -25,31 +25,32 @@ public class Jugador {
         }
         pnl.repaint();
     }
-        public String getGrupos(){
-            String resultado = " no se encontraron grupos ";
-            //inicial contadores
-            int [] contadores = new int[13];
-            for ( Carta c: cartas){
-                contadores[ c.getNombre().ordinal() ]++;
-            }
-            //obtener los resultados
-            boolean hayGrupos = false;
-            for(int cont:  contadores){
-                if(cont >= 2){
-                    hayGrupos = true;
-                }
-            } 
-            if(hayGrupos){
-                resultado = " se encontraron los siguientes grupos: \n";
-                int p = 0;
-                for(int cont: contadores){
-                    if(cont >=2){
-                        resultado += Grupo.values()[cont] + " de " + NombreCarta.values()[p]+ "\n";
-                    }
-                    p++;
-                }
-            }
 
-            return resultado; 
+    public String getGrupos() {
+        String resultado = " no se encontraron grupos ";
+        // inicial contadores
+        int[] contadores = new int[13];
+        for (Carta c : cartas) {
+            contadores[c.getNombre().ordinal()]++;
         }
+        // obtener los resultados
+        boolean hayGrupos = false;
+        for (int cont : contadores) {
+            if (cont >= 2) {
+                hayGrupos = true;
+            }
+        }
+        if (hayGrupos) {
+            resultado = " se encontraron los siguientes grupos: \n";
+            int p = 0;
+            for (int cont : contadores) {
+                if (cont >= 2) {
+                    resultado += Grupo.values()[cont] + " de " + NombreCarta.values()[p] + "\n";
+                }
+                p++;
+            }
+        }
+
+        return resultado;
+    }
 }
