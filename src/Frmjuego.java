@@ -17,30 +17,34 @@ public class Frmjuego extends JFrame {
 
     public Frmjuego() {
         setSize(800, 400);
-        setTitle("Juguemos al REMIS");
+        setTitle("Apuntado");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
-
+        setLayout(null);       
+  
         // Agregar botones de comando
         JButton btnRepartir = new JButton("Repartir");
         btnRepartir.setBounds(10, 10, 100, 25);
-        getContentPane().add(btnRepartir);
+        getContentPane().add(btnRepartir); 
+        btnRepartir.setBackground(Color.black);
+        btnRepartir.setForeground(Color.white);      
 
         JButton btnVerificar = new JButton("Verificar");
-        btnVerificar.setBounds(120, 10, 100, 25);
+        btnVerificar.setBounds(getBounds().width - 130, 10, 100, 25);
+        btnVerificar.setBackground(Color.LIGHT_GRAY);
         getContentPane().add(btnVerificar);
 
         pnlJugador1 = new JPanel();
         pnlJugador1.setLayout(null);
-        pnlJugador1.setBackground(new Color(50, 255, 0));
+        pnlJugador1.setBackground(new Color(120, 250, 0));
 
         pnlJugador2 = new JPanel();
         pnlJugador2.setLayout(null);
-        pnlJugador2.setBackground(new Color(0, 255, 255));
+        pnlJugador2.setBackground(new Color(150, 20, 180));
 
         tpJugadores = new JTabbedPane();
         tpJugadores.addTab("Martin Estrada Contreras", pnlJugador1);
         tpJugadores.addTab("Raúl Vidal", pnlJugador2);
+        tpJugadores.setBackground(Color.white);
 
         tpJugadores.setBounds(10, 40, 750, 300);
         getContentPane().add(tpJugadores);

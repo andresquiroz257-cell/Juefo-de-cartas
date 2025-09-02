@@ -5,8 +5,8 @@ import javax.swing.JPanel;
 public class Jugador {
 
     private final int TOTAL_CARTAS = 10;
-    private final int MARGEN = 10;
-    private final int DISTANCIA = 40;
+    private final int MARGEN = 25;
+    private final int DISTANCIA = 53;
     private Carta[] cartas = new Carta[TOTAL_CARTAS];
     private Random r = new Random();
 
@@ -27,7 +27,7 @@ public class Jugador {
     }
 
     public String getGrupos() {
-        String resultado = " no se encontraron grupos ";
+        String resultado = "No se encontraron grupos ";
         // inicial contadores
         int[] contadores = new int[13];
         for (Carta c : cartas) {
@@ -41,11 +41,11 @@ public class Jugador {
             }
         }
         if (hayGrupos) {
-            resultado = " se encontraron los siguientes grupos: \n";
+            resultado = "Se encontraron los siguientes grupos: \n";
             int p = 0;
             for (int cont : contadores) {
                 if (cont >= 2) {
-                    resultado += Grupo.values()[cont] + " de " + NombreCarta.values()[p] + "\n";
+                    resultado += "\n" + Grupo.values()[cont] + " de " + NombreCarta.values()[p] + "\n";
                 }
                 p++;
             }
