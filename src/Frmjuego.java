@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-
+// hasta el domingo 
 public class Frmjuego extends JFrame {
 
     private JTabbedPane tpJugadores;

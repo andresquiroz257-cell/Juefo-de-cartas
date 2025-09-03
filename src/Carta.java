@@ -35,7 +35,7 @@ public class Carta {
         });
 
     }
- //gana el que menos ppuntaje tenga, si saca escalera de terna o cuarta solo se suma los sobrantes, agregar boton de gana y pierde, validar de los 2 jugadores quien gana
+ //gana el que menos ppuntaje tenga, si saca escalera de terna o cuarta solo se suma los sobrantes, agregar boton de gana y pierde, validar de los 2 jugadores quien gana 
 
     public Pinta getPinta() {
         if (indice <= 13) {
