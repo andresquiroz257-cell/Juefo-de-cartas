@@ -30,10 +30,13 @@ public class Carta {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(null,
-                        "Carta " + getNombre() + " de " + getPinta());
+                        "Carta " + getNombre() + " de " + getPinta() + " " + getNumero());
             }
         });
+    }
 
+    public int getNumero(){
+        return indice;
     }
 
     public Pinta getPinta() {
