@@ -109,15 +109,14 @@ public class Jugador {
     return resultado.toString();
 }
 
-    private boolean[] detectarIndicesEscaleras(int minRun) {
+    private boolean[] detectarEscalera(int minRun) {
         boolean[] usadasEsc = new boolean[TOTAL_CARTAS];
 
         for (Pinta pinta : Pinta.values()) {
             boolean[] present = new boolean[13];
-            int[] posPorValor = new int[13]; // primer índice donde aparece ese valor (o -1)
+            int[] posPorValor = new int[13];
             for (int v = 0; v < 13; v++) posPorValor[v] = -1;
 
-            // rellenar present[] y posPorValor[] (guardando la primera coincidencia)
             for (int i = 0; i < TOTAL_CARTAS; i++) {
                 Carta c = cartas[i];
                 if (c != null && c.getPinta() == pinta) {
@@ -126,18 +125,15 @@ public class Jugador {
                     if (posPorValor[v] == -1) posPorValor[v] = i;
                 }
             }
-
             // si no hay cartas de esta pinta, saltar
             boolean any = false;
             for (int i = 0; i < 13; i++) if (present[i]) { any = true; break; }
             if (!any) continue;
 
-            // ext[0..13] = present[0..12] y ext[13] = present[0] (As como alto)
             boolean[] ext = new boolean[14];
             for (int i = 0; i < 13; i++) ext[i] = present[i];
             ext[13] = present[0];
 
-            // buscar runs en ext[]
             int runStart = -1;
             for (int i = 0; i <= 14; i++) { // i==14 forzar cierre
                 if (i < 14 && ext[i]) {
@@ -164,49 +160,10 @@ public class Jugador {
         return usadasEsc;
     }
 
-    public int getPuntaje() {
-        boolean[] usadas = new boolean[TOTAL_CARTAS];
-
-        // 1) marcar pares/ternas/cuarta por nombre
-        int[] contadores = new int[13];
-        for (int i = 0; i < TOTAL_CARTAS; i++) {
-            if (cartas[i] != null) contadores[cartas[i].getNombre().ordinal()]++;
-        }
-        for (int i = 0; i < TOTAL_CARTAS; i++) {
-            if (cartas[i] != null) {
-                int count = contadores[cartas[i].getNombre().ordinal()];
-                if (count >= 2) usadas[i] = true;
-            }
-        }
-
-        // 2) marcar cartas de escaleras
-        final int MIN_RUN = 2;
-        boolean[] usadasEsc = detectarIndicesEscaleras(MIN_RUN);
-        for (int i = 0; i < TOTAL_CARTAS; i++) if (usadasEsc[i]) usadas[i] = true;
-
-        // 3) sumar cartas no usadas
-        int total = 0;
-        for (int i = 0; i < TOTAL_CARTAS; i++) {
-            if (cartas[i] != null && !usadas[i]) {
-                switch (cartas[i].getNombre()) {
-                    case AS:
-                    case JACK:
-                    case QUEEN:
-                    case KING:
-                        total += 10;
-                        break;
-                    default:
-                        total += cartas[i].getNombre().ordinal() + 1;
-                }
-            }
-        }
-        return total;
-    }
-
     public String getCartasSobran(int minRun) {
         boolean[] usadas = new boolean[TOTAL_CARTAS];
 
-        // 1) marcar pares/ternas/cuarta por nombre
+        // marcar pares/ternas/cuarta por nombre
         int[] contadores = new int[13];
         for (int i = 0; i < TOTAL_CARTAS; i++) {
             if (cartas[i] != null) contadores[cartas[i].getNombre().ordinal()]++;
@@ -217,12 +174,12 @@ public class Jugador {
                 if (count >= 2) usadas[i] = true;
             }
         }
-
-        // 2) marcar cartas de escaleras usando el helper
-        boolean[] usadasEsc = detectarIndicesEscaleras(minRun);
-        for (int i = 0; i < TOTAL_CARTAS; i++) if (usadasEsc[i]) usadas[i] = true;
-
-        // 3) construir String de sobrantes
+        //cpmbinar las cartas usadas de pares y de escaleras 
+        boolean[] usadasEsc = detectarEscalera(minRun);
+        for (int i = 0; i < TOTAL_CARTAS; i++) {
+            if (usadasEsc[i]) usadas[i] = true;
+        }   
+        // verificar si la cartas no pertenece a las usadas o no esta vacia, y armar el texto
         String sobrante = " ";
         sobrante += (" \n Cartas sobrantes:\n");
         boolean any = false;
@@ -240,7 +197,7 @@ public class Jugador {
                         valor = 10;
                         break;
                     default:
-                        valor = nc.ordinal() + 1;
+                        valor = nc.ordinal() + 1; // sumar 1 porque ordinal empieza en 0
                 }
                 sobrante += "  " + (nc.name()) + (" de ") + (p.name())
                    + (" ( ") + (valor) + (") \n");
@@ -248,5 +205,43 @@ public class Jugador {
         }
         if (!any) return "No quedan cartas sobrantes.";
         return sobrante;
+    }
+
+    public int getPuntaje() {
+        boolean[] usadas = new boolean[TOTAL_CARTAS];
+
+        // marcar cartas repetidas
+        int[] contadores = new int[13];
+        for (int i = 0; i < TOTAL_CARTAS; i++) {
+            if (cartas[i] != null) contadores[cartas[i].getNombre().ordinal()]++;
+        }
+        for (int i = 0; i < TOTAL_CARTAS; i++) {
+            if (cartas[i] != null) {
+                int count = contadores[cartas[i].getNombre().ordinal()];
+                if (count >= 2) usadas[i] = true;
+            }
+        }
+        // llamar a detectarEscalera para marcar las cartas usadas en escaleras
+        final int MIN_RUN = 2;
+        boolean[] usadasEsc = detectarEscalera(MIN_RUN);
+        for (int i = 0; i < TOTAL_CARTAS; i++) if (usadasEsc[i]) usadas[i] = true;
+
+        // suma de descartes y cambiar el AS y las figuras por 10
+        int total = 0;
+        for (int i = 0; i < TOTAL_CARTAS; i++) {
+            if (cartas[i] != null && !usadas[i]) {
+                switch (cartas[i].getNombre()) {
+                    case AS:
+                    case JACK:
+                    case QUEEN:
+                    case KING:
+                        total += 10;
+                        break;
+                    default:
+                        total += cartas[i].getNombre().ordinal() + 1;
+                }
+            }
+        }
+        return total; // devuelve el puntaje
     }
 }
