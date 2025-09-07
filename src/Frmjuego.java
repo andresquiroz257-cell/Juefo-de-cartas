@@ -22,13 +22,13 @@ public class Frmjuego extends JFrame {
         setLayout(null);       
   
         // Agregar botones de comando
-        JButton btnRepartir = new JButton("Repartir");
+        JButton btnRepartir = new JButton("REPARTIR");
         btnRepartir.setBounds(10, 10, 100, 25);
         getContentPane().add(btnRepartir); 
         btnRepartir.setBackground(Color.black);
         btnRepartir.setForeground(Color.white);      
 
-        JButton btnVerificar = new JButton("Verificar");
+        JButton btnVerificar = new JButton("VERIFICAR");
         btnVerificar.setBounds(getBounds().width - 130, 10, 100, 25);
         btnVerificar.setBackground(Color.LIGHT_GRAY);
         getContentPane().add(btnVerificar);
@@ -84,10 +84,10 @@ public class Frmjuego extends JFrame {
     private void verificar() {
         switch (tpJugadores.getSelectedIndex()) {
             case 0:
-                JOptionPane.showMessageDialog(null, jugador1.getGrupos());
+                JOptionPane.showMessageDialog(null, jugador1.getGrupos()+ "\n" + jugador1.getEscaleras());
                 break;
             case 1:
-                JOptionPane.showMessageDialog(null, jugador2.getGrupos());
+                JOptionPane.showMessageDialog(null, jugador2.getGrupos()+ "\n" + jugador2.getEscaleras());
                 break;
         }
     }
