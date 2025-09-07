@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-// hasta el domingo 
+ 
 public class Frmjuego extends JFrame {
 
     private JTabbedPane tpJugadores;
@@ -29,9 +29,15 @@ public class Frmjuego extends JFrame {
         btnRepartir.setForeground(Color.white);      
 
         JButton btnVerificar = new JButton("VERIFICAR");
-        btnVerificar.setBounds(getBounds().width - 130, 10, 100, 25);
+        btnVerificar.setBounds(230, 10, 100, 25);
         btnVerificar.setBackground(Color.LIGHT_GRAY);
         getContentPane().add(btnVerificar);
+
+        JButton btnPuntaje = new JButton("PUNTAJE");
+        btnPuntaje.setBounds(getBounds().width - 130, 10, 100, 25);
+        
+        btnPuntaje.setBackground(Color.LIGHT_GRAY);
+        getContentPane().add(btnPuntaje);
 
         pnlJugador1 = new JPanel();
         pnlJugador1.setLayout(null);
@@ -68,6 +74,13 @@ public class Frmjuego extends JFrame {
 
         });
 
+        btnPuntaje.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarPuntaje();
+            }
+        });
+
         // instanciar los jugadores
         jugador1 = new Jugador();
         jugador2 = new Jugador();
@@ -84,12 +97,37 @@ public class Frmjuego extends JFrame {
     private void verificar() {
         switch (tpJugadores.getSelectedIndex()) {
             case 0:
-                JOptionPane.showMessageDialog(null, jugador1.getGrupos()+ "\n" + jugador1.getEscaleras());
+                JOptionPane.showMessageDialog(null, jugador1.getGrupos() + "\n\n" + jugador1.getEscaleras());
                 break;
             case 1:
-                JOptionPane.showMessageDialog(null, jugador2.getGrupos()+ "\n" + jugador2.getEscaleras());
+                JOptionPane.showMessageDialog(null, jugador2.getGrupos() + "\n\n" + jugador2.getEscaleras());
                 break;
         }
     }
 
+    private void mostrarPuntaje() {
+        final int MIN_RUN = 2;  
+        int p1 = jugador1.getPuntaje();
+        int p2 = jugador2.getPuntaje();
+
+        String sobrantes1 = jugador1.getCartasSobran(MIN_RUN);
+        String sobrantes2 = jugador2.getCartasSobran(MIN_RUN);
+
+        String ganador;
+        if (p1 < p2) {
+            ganador = "GANO MARTIN ESTRADA CONTRERAS CON " + p1 + " DE PUNTAJE";
+        } else if (p2 < p1) {
+            ganador = "GANO RAUL VIDAL CON  " + p2 + " DE PUNTAJE";
+        } else {
+            ganador = "EMPATE DE " + p1 + " PUNTOS";
+        }
+
+        String mensaje = "Martin Estrada Contreras: " + p1 + " puntos\n" +
+                         sobrantes1 + "\n\n" +
+                         "Raúl Vidal: " + p2 + " puntos\n" +
+                         sobrantes2 + "\n\n" +
+                         ganador;
+
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
 }
