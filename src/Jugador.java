@@ -6,7 +6,7 @@ public class Jugador {
 
     private final int TOTAL_CARTAS = 10;
     private final int MARGEN = 25;
-    private final int DISTANCIA = 53;
+    private final int DISTANCIA = 55;
 
     private Carta[] cartas = new Carta[TOTAL_CARTAS];
     private Random r = new Random();

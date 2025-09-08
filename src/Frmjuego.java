@@ -88,12 +88,11 @@ public class Frmjuego extends JFrame {
         pnlJugador2.add(lblPuntos2);
 
         // para mostrar los textos incrustados y no en mensajes emeregentes
-        txtRes1 = new JTextArea ();
-        
+        txtRes1 = new JTextArea ();    
         txtRes1.setEditable(false);
         txtRes1.setLineWrap(true);
         txtRes1.setWrapStyleWord(true);
-         txtRes1.setFont(new Font("SansSerif", Font.BOLD, 12)); 
+        txtRes1.setFont(new Font("SansSerif", Font.BOLD, 12));
         txtRes1.setForeground(Color.BLACK);
         txtRes1.setBackground(new Color(12, 194, 29));
         spRes1 = new JScrollPane(txtRes1);
@@ -105,7 +104,7 @@ public class Frmjuego extends JFrame {
         txtRes2.setEditable(false);
         txtRes2.setLineWrap(true);
         txtRes2.setWrapStyleWord(true);
-        txtRes2.setFont(new Font("SansSerif", Font.BOLD, 12));
+        txtRes2.setFont(new Font("SansSerif", Font.PLAIN, 12));
         txtRes2.setForeground(Color.white);
         txtRes2.setBackground(new Color(165, 24, 199));
         spRes2 = new JScrollPane(txtRes2);
