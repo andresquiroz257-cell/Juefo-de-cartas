@@ -34,7 +34,6 @@ public class Carta {
             }
         });
     }
-
     public int getNumero(){
         return indice;
     }

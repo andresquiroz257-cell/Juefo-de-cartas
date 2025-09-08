@@ -88,14 +88,14 @@ public class Jugador {
                     if (longitud >= MIN_run) {
                         
                         encontrado = true;
-                        resultado += String.format("Escalera de %d cartas de %s:  | ", longitud, pinta);
+                        resultado += String.format("Escalera de %d cartas de %s:  - ", longitud, pinta);
 
                         for (int j = runStart; j < i; j++) {
                             
                             if (j == 13) {
                                 resultado += "AS ";
                             } else {
-                                resultado += NombreCarta.values()[j].name() + " | ";
+                                resultado += NombreCarta.values()[j].name() + " - ";
                             }
                         }
                         resultado += "\n";
@@ -181,7 +181,7 @@ public class Jugador {
         }   
         // verificar si la cartas no pertenece a las usadas o no esta vacia, y armar el texto
         String sobrante = " ";
-        sobrante += (" \n Cartas sobrantes:\n");
+        sobrante += ("Cartas Sobrantes:\n\n");
         boolean any = false;
         for (int i = 0; i < TOTAL_CARTAS; i++) {
             if (cartas[i] != null && !usadas[i]) {
@@ -199,7 +199,7 @@ public class Jugador {
                     default:
                         valor = nc.ordinal() + 1; // sumar 1 porque ordinal empieza en 0
                 }
-                sobrante += "  " + (nc.name()) + (" de ") + (p.name())
+                sobrante += " " + (nc.name()) + (" de ") + (p.name())
                    + (" ( ") + (valor) + (") \n");
             }
         }
